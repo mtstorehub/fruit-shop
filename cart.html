@@ -6,7 +6,7 @@
   <title>Shoppig Display</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="stylesheet" href="./css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/cart-style.css">
 
 </head>
@@ -26,24 +26,18 @@
 
     <div class="nav-links">
       <em>Hi </em><label id="username"></label>
+      <button class="btn btn-primary">Cart 
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        <sup class="badge" id="cartItems">0</sup>
+      </button>
       <a href="index.html" target="_blank" id="btnLogout">Logout</a>
     </div>
   </div>
   <div id="root" class="wrap cf">
     <h1 class="projTitle">Popular<span> Products</span></h1>
     <div class="heading cf">
-      <div id="data-container">
-        <div class="container repeat">
-
-          <div class="card">
-            <img src="img/macbook1.jpg" alt="Avatar" style="width:100%">
-            <div class="container">
-              <h4><b>John Doe</b></h4>
-              <p>Architect & Engineer</p>
-            </div>
-          </div>
-
-        </div>
+      <div id="item-container">
+        <!-- inject data from script -->
       </div>
     </div>
   </div>

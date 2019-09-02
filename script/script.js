@@ -14,23 +14,23 @@ $$('btnCreate').onclick = function(event) {
    var email = $$("newEmail").value;
    if(!/Mg|Ma\s[A-Z a-z]{2,}/.test(name)){
       alert("Your name must be Mg or Ma");
-      $$("newName").focus();
+      $("newName").focus();
       return;
    }
    if(password.length <= 5) {
       alert("Your password's length must be greater then five")
-      $$("newPsw").focus();
+      $("newPsw").focus();
       return;
    }
    if(!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)){
       alert("email format invalid")
-      $$("newEmail").focus();
+      $("newEmail").focus();
       return;
    }
    localStorage.setItem("name", name)
    localStorage.setItem("psw",password)
    alert("Successful Register!");
-   $$('.message a#btnSignin').click();
+   $('.message a#btnSignin').click();
 }
 
 $$("btnLogin").onclick = function(event) {
