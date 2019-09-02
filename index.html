@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Flat HTML5/CSS3 Login Form</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <video autoplay muted loop>
+        <source src="video/shop.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+<div class="login-page">
+  <div class="form">
+    <div class="avatar-panel">
+      <img src="img/panda-avatar.png" id="avatar">
+    </div>
+    <form class="register-form">
+      <input type="text" placeholder="name" id="newName" required/>
+      <input type="password" placeholder="password" id="newPsw"required/>
+      <input type="email" placeholder="email address" id="newEmail"/>
+      <button id="btnCreate">create</button>
+      <p class="message">Already registered? <a href="#" id="btnSignin">Sign In</a></p>
+    </form>
+    <form class="login-form">
+      <input type="text" placeholder="username" id="loginName"/>
+      <input type="password" placeholder="password" id="loginPsw"/>
+      <button id="btnLogin">login</button>
+      <p class="message">Not registered? <a href="#" id="btnSignup">Create an account</a></p>
+    </form>
+  </div>
+</div>
+<!-- partial -->
+  <script src='./script/jquery.min.js'></script>
+<script  src="./script/script.js"></script>
+
+</body>
+</html>
