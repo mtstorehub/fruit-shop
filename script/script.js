@@ -38,7 +38,7 @@ $$("btnLogin").onclick = function(event) {
    var loginPassword = $$("loginPsw").value;
    if(localStorage.getItem('name')==loginName && localStorage.getItem('psw') == loginPassword){
       alert("login successful!");
-      window.close();
+      setTimeout(()=> {window.close()}, 1000);
       window.open("cart.html")
    }
    else {

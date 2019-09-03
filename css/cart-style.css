@@ -459,3 +459,9 @@ div .header-title>h1 label {
   letter-spacing: -.025em;
   width: 35%;
 }
+
+.btnContinueShop {
+  float: right;
+  width: 45%;
+  margin: 2em 0;
+}

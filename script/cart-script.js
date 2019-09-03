@@ -5,9 +5,8 @@ var CREATE_DOM = element => document.createElement(element);
 window.onload = function () {
 
   $('username').innerHTML = localStorage.getItem('name').substr(localStorage.getItem('name').indexOf(' ') + 1);
-  $('cart').style.visibility = 'hidden';
+  $('cart').style.display = 'none';
   renderingFruitData();
-
 }
 
 
@@ -17,9 +16,9 @@ $('btnLogout').onclick = function (event) {
   window.open("index.html");
 }
 
-function gotoCart(){
-  $('items').outerHTML = '';
-  $('cart').style.visibility = 'visible';
+function gotoCart() {
+  $('items').style.display = 'none';
+  $('cart').style.display = 'block';
   renderingCartData();
 }
 
@@ -36,7 +35,12 @@ function renderingFruitData() {
 function renderingCartData() {
   busket.map((item, index) => {
     $('item-cart-container').appendChild(createCartItem(item, index));
+    Object.assign(item, {total: item.price})
   });
+  // calculate total
+
+   updateTotal();
+
 }
 
 function createItem(_fruit, id) {
@@ -70,7 +74,7 @@ function createItem(_fruit, id) {
   var box_child_2 = CREATE_DOM('div');
   box_child_2.className = 'rating';
   box.appendChild(box_child_2);
-  for (let index = _fruit.rating; index > 0; index--) {
+  for (let index = (_fruit.rating > 5) ? 5 : _fruit.rating ; index > 0; index--) {
     var star = CREATE_DOM('i');
     star.className = 'fa fa-star';
     star.setAttribute('aria-hidden', 'true');
@@ -93,7 +97,7 @@ function createItem(_fruit, id) {
   return item;
 }
 
-function createCartItem(item, id){
+function createCartItem(item, id) {
   var listitem = CREATE_DOM('div');
   listitem.className = 'items odd';
   var infoPanel = CREATE_DOM('div');
@@ -114,9 +118,11 @@ function createCartItem(item, id){
   qty_input.type = 'text';
   qty_input.className = 'qty';
   qty_input.placeholder = '1';
-  qty_input.id='qty1';
+  qty_input.id = 'cartinput' + id;
+  qty_input.pattern = '[0-9]';
+  qty_input.addEventListener('keyup', () => { updateItemTotal(qty_input.value, item.price, id) })
   qty_panel.appendChild(qty_input);
-  qty_panel.appendChild(document.createTextNode('x '+ item.price +' MMK'));
+  qty_panel.appendChild(document.createTextNode('x ' + item.price + ' MMK'));
   child_1.appendChild(qty_panel);
   var status = CREATE_DOM('p');
   status.className = 'stockStatus';
@@ -126,7 +132,8 @@ function createCartItem(item, id){
   item_total_panel.className = 'prodTotal cartSection';
   infoPanel.appendChild(item_total_panel);
   var item_total = CREATE_DOM('p');
-  item_total.textContent = item.price+' MMK';
+  item_total.id = 'itemtotal' + id;
+  item_total.textContent = item.price + ' MMK';
   item_total_panel.appendChild(item_total);
   return listitem;
 }
@@ -137,11 +144,7 @@ function addToCart(item, id) {
   cart.setAttribute('aria-hidden', 'true');
 
   if (busket.includes(item)) {
-    console.log(item);
     busket.splice(busket.findIndex(buyItem => buyItem == item), 1)
-    
-    console.log(busket);
-    
     btn.className = "btn btn-default"
     btn.textContent = 'Add to Cart';
     cart.className = 'fa fa-cart-plus';
@@ -158,12 +161,43 @@ function addToCart(item, id) {
   $('cartItems').textContent = busket.length;
 }
 
+function updateItemTotal(qty, price, id) {
+  if(isNaN(qty)){
+    alert('Please number only');
+    $('cartinput'+id).value = 1;
+    qty = 1;
+  }
+  qty = (qty) ? qty : 1;
+  $('itemtotal' + id).textContent = (qty * price) + ' MMK';
+  Object.assign(busket[id],{total: qty * price })
+  updateTotal();
+}
+
+function updateTotal(){
+  $('final-amount').textContent = busket.reduce((a, b) => ({total: a.total + b.total})).total + ' MMK'
+}
+
+function continueShop() {
+  $('cart').style.display = 'none';
+  $('item-cart-container').innerHTML = '';
+  $('items').style.display = 'block';
+  $('item-container').innerHTML = '';
+  renderingFruitData();
+  busket = [];
+  // update cart
+  $('cartItems').textContent = busket.length;
+}
+
 var IMAGE_PATH = 'img/fruits/';
 var busket = []
+
 var data = [
   { name: 'tomato', image_src: 'tomato.jpg', price: 1000, rating: 5 },
   { name: 'cucumber', image_src: 'cucumber.jpg', price: 2000, rating: 2 },
   { name: 'chayote', image_src: 'chayote.jpg', price: 3000, rating: 3 },
   { name: 'potato', image_src: 'potato.jpg', price: 1500, rating: 5 },
-  { name: 'chilli', image_src: 'chilli.jpg', price: 1000, rating: 4 }
+  { name: 'chilli', image_src: 'chilli.jpg', price: 1000, rating: 4 },
+  { name: 'orange', image_src: 'orange.jpg', price: 1500, rating: 1 },
+  { name: 'mango', image_src: 'mango.jpg', price: 4000, rating: 4 },
+  { name: 'watermelon', image_src: 'watermelon.jpg', price: 3000, rating: 4 },
 ]
