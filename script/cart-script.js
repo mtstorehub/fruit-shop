@@ -5,6 +5,7 @@ var CREATE_DOM = element => document.createElement(element);
 window.onload = function () {
 
   $('username').innerHTML = localStorage.getItem('name').substr(localStorage.getItem('name').indexOf(' ') + 1);
+  $('cart').style.visibility = 'hidden';
   renderingFruitData();
 
 }
@@ -16,6 +17,12 @@ $('btnLogout').onclick = function (event) {
   window.open("index.html");
 }
 
+function gotoCart(){
+  $('items').outerHTML = '';
+  $('cart').style.visibility = 'visible';
+  renderingCartData();
+}
+
 function renderingFruitData() {
   var view = CREATE_DOM('div');
   view.className = 'row';
@@ -24,11 +31,15 @@ function renderingFruitData() {
   data.map((item, index) => {
     view.appendChild(createItem(item, index))
   })
+}
 
+function renderingCartData() {
+  busket.map((item, index) => {
+    $('item-cart-container').appendChild(createCartItem(item, index));
+  });
 }
 
 function createItem(_fruit, id) {
-
   var item = CREATE_DOM('div');
   item.className = 'column';
   // view.appendChild(item);
@@ -57,6 +68,7 @@ function createItem(_fruit, id) {
   price_text.textContent = _fruit.price + ' MMK';
   box_child_1.appendChild(price_text);
   var box_child_2 = CREATE_DOM('div');
+  box_child_2.className = 'rating';
   box.appendChild(box_child_2);
   for (let index = _fruit.rating; index > 0; index--) {
     var star = CREATE_DOM('i');
@@ -79,6 +91,44 @@ function createItem(_fruit, id) {
   add_to_cart_btn.appendChild(cart_icon);
   button_panel.appendChild(add_to_cart_btn);
   return item;
+}
+
+function createCartItem(item, id){
+  var listitem = CREATE_DOM('div');
+  listitem.className = 'items odd';
+  var infoPanel = CREATE_DOM('div');
+  infoPanel.className = 'infoWrap';
+  listitem.appendChild(infoPanel);
+  var child_1 = CREATE_DOM('div');
+  child_1.className = 'cartSection';
+  infoPanel.appendChild(child_1);
+  var cart_image = CREATE_DOM('img');
+  cart_image.src = IMAGE_PATH + item.image_src;
+  cart_image.className = 'itemImg';
+  child_1.appendChild(cart_image);
+  var cart_name = CREATE_DOM('h3');
+  cart_name.textContent = item.name;
+  child_1.appendChild(cart_name);
+  var qty_panel = CREATE_DOM('p');
+  var qty_input = CREATE_DOM('input');
+  qty_input.type = 'text';
+  qty_input.className = 'qty';
+  qty_input.placeholder = '1';
+  qty_input.id='qty1';
+  qty_panel.appendChild(qty_input);
+  qty_panel.appendChild(document.createTextNode('x '+ item.price +' MMK'));
+  child_1.appendChild(qty_panel);
+  var status = CREATE_DOM('p');
+  status.className = 'stockStatus';
+  status.textContent = 'In Stock';
+  child_1.appendChild(status);
+  var item_total_panel = CREATE_DOM('div');
+  item_total_panel.className = 'prodTotal cartSection';
+  infoPanel.appendChild(item_total_panel);
+  var item_total = CREATE_DOM('p');
+  item_total.textContent = item.price+' MMK';
+  item_total_panel.appendChild(item_total);
+  return listitem;
 }
 
 function addToCart(item, id) {

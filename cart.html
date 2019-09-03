@@ -26,7 +26,7 @@
 
     <div class="nav-links">
       <em>Hi </em><label id="username"></label>
-      <button class="btn btn-primary">Cart 
+      <button class="btn btn-primary" onclick="gotoCart()">Cart
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         <sup class="badge" id="cartItems">0</sup>
       </button>
@@ -34,16 +34,31 @@
     </div>
   </div>
   <div id="root" class="wrap cf">
-    <h1 class="projTitle">Popular<span> Products</span></h1>
-    <div class="heading cf">
-      <div id="item-container">
-        <!-- inject data from script -->
+
+    <div id="items">
+      <h1 class="projTitle">Popular<span> Products</span></h1>
+      <div class="heading cf">
+        <div id="item-container">
+          <!-- inject data from script -->
+        </div>
       </div>
     </div>
+
+    <div id="cart" class="cart">
+      <h1 class="projTitle">Shopping<span> Cart</span></h1>
+      <ul id="item-cart-container">
+        
+
+      </ul>
+
+      <div class="subtotal">
+            <div class="totalRow final"><span class="label">Total</span><span class="value" id="final-amount">0 MMK</span></div>
+        </div>
+
+    </div>
+
   </div>
   <script src="./script/cart-script.js"></script>
-
-
 
 
 </body>

@@ -1,8 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic|Montserrat:400,700);
-
-
 html {
-  line-height: 1;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 * {
@@ -13,6 +12,9 @@ body {
   color: #333;
   -webkit-font-smoothing: antialiased;
   font-family: "Droid Serif", serif;
+  margin: 0px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 img {
@@ -32,7 +34,7 @@ img {
   text-align: center;
   font-size: 2em;
   padding: 1em 0;
-  border-bottom: 1px solid #dadada;
+  border-bottom: 1px solid #795548;
   letter-spacing: 3px;
 }
 
@@ -53,12 +55,10 @@ img {
     width: 98%;
     padding: 2% 0;
   }
-
   .projTitle {
     font-size: 1.5em;
     padding: 10% 5%;
   }
-
   .heading {
     padding: 1em;
     font-size: 90%;
@@ -104,6 +104,7 @@ img {
   padding: 13px 10px 13px 10px;
   text-decoration: none;
   color: #efefef;
+  border-radius: 1em;
 }
 
 div .header-title {
@@ -142,9 +143,11 @@ div .header-title>h1 label {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  display: -webkit-box;
 }
 
 /* Float four columns side by side */
+
 .column {
   float: left;
   width: 25%;
@@ -153,25 +156,26 @@ div .header-title>h1 label {
 }
 
 /* Remove extra left and right margins, due to padding */
+
 .row {
   margin: 0 -5px;
 }
 
 /* Clear floats after the columns */
+
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
 
-
 /* Responsive columns */
+
 @media screen and (max-width: 600px) {
   .column {
     width: 60%;
     display: block;
     margin-bottom: 20px;
-
   }
 }
 
@@ -200,6 +204,7 @@ div .header-title>h1 label {
 }
 
 /* Style the counter cards */
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: #fff;
@@ -214,8 +219,8 @@ div .header-title>h1 label {
 .card-title {
   padding: 10px;
   font-weight: 600;
-  background: #ff6d00db;
-  border-right: solid 2px #303030;
+  background: #FFC107;
+  border-right: solid 2px #0b8610;
   text-transform: capitalize;
   margin-right: 15px;
 }
@@ -248,26 +253,20 @@ div .header-title>h1 label {
   margin-top: 8%;
 }
 
-.btn-default {
+.btn-default, .btn-primary, .bought {
   flex: 1;
   transition: 0.4s;
   color: #fff;
   background-color: #303030;
   border: none;
-  height: 2.4em;
+  height: 2.5em;
   font-size: 1em;
   outline: none;
 }
 
 .btn-primary {
-  flex: 1;
-  transition: 0.4s;
-  color: #fff;
+  border-radius: 1em;
   background-color: transparent;
-  border: none;
-  height: 2.4em;
-  font-size: 1em;
-  outline: none;
 }
 
 .btn-default:hover {
@@ -275,21 +274,14 @@ div .header-title>h1 label {
 }
 
 .bought {
-  flex: 1;
-  transition: 0.4s;
-  color: #fff;
-  background-color: hsl(340, 100%, 50%);
-  border: none;
-  height: 2.4em;
-  font-size: 1em;
-  outline: none;
+  background-color: hsl(36, 100%, 50%);
 }
 
 .btn-primary:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.fa-cart-plus , .fa-cart-arrow-down {
+.fa-cart-plus, .fa-cart-arrow-down {
   font-size: x-large;
   margin-left: 20px;
 }
@@ -301,12 +293,12 @@ div .header-title>h1 label {
 .box {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
-.box>div {
+.box>div>.rating {
   flex: 1 1 auto;
-  text-align: start;
+  text-align: end;
 }
 
 .badge {
@@ -315,5 +307,155 @@ div .header-title>h1 label {
   display: inline-block;
   width: 20px;
   height: 20px;
+}
 
+.cart {
+  padding: 1em 0;
+}
+.cart .items {
+  display: block;
+  width: 100%;
+  vertical-align: middle;
+  padding: 1.5em;
+  border-bottom: 1px solid #fafafa;
+}
+.cart .items.even {
+  background: #fafafa;
+}
+.cart .items .infoWrap {
+  display: table;
+  width: 100%;
+}
+
+.cart .items .cartSection {
+  display: table-cell;
+  vertical-align: middle;
+}
+.cart .items .cartSection .itemNumber {
+  font-size: .75em;
+  color: #777;
+  margin-bottom: .5em;
+}
+.cart .items .cartSection h3 {
+  font-size: 1em;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .025em;
+}
+.cart .items .cartSection p {
+  display: inline-block;
+  font-size: .85em;
+  color: #777777;
+  font-family: "Montserrat", sans-serif;
+}
+.cart .items .cartSection p .quantity {
+  font-weight: bold;
+  color: #333;
+}
+.cart .items .cartSection p.stockStatus {
+  color: #82CA9C;
+  font-weight: bold;
+  padding: .5em 0 0 1em;
+  text-transform: uppercase;
+}
+
+.cart .items .cartSection.qtyWrap, .cart .items .cartSection.prodTotal {
+  text-align: center;
+}
+.cart .items .cartSection.qtyWrap p, .cart .items .cartSection.prodTotal p {
+  font-weight: bold;
+  font-size: 1.25em;
+}
+.cart .items .cartSection input.qty {
+  width: 2em;
+  text-align: center;
+  font-size: 1em;
+  padding: .25em;
+  margin: 1em .5em 0 0;
+}
+.cart .items .cartSection .itemImg {
+  width: 12em;
+  display: inline;
+  padding-right: 1em;
+  float: left;
+}
+
+.special {
+  display: block;
+  font-family: "Montserrat", sans-serif;
+}
+.special .specialContent {
+  padding: 1em 1em 0;
+  display: block;
+  margin-top: .5em;
+  border-top: 1px solid #dadada;
+}
+.special .specialContent:before {
+  content: "\21b3";
+  font-size: 1.5em;
+  margin-right: 1em;
+  color: #6f6f6f;
+  font-family: helvetica, arial, sans-serif;
+}
+
+
+
+.btn:link, .btn:visited {
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: -.015em;
+  font-size: 1em;
+  padding: 1em 3em;
+  color: #fff;
+  background: #82ca9c;
+  font-weight: bold;
+  border-radius: 50px;
+  float: right;
+  text-align: right;
+  -webkit-transition: all 0.25s linear;
+  -moz-transition: all 0.25s linear;
+  -ms-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+
+.btn:after {
+  content: "\276f";
+  padding: .5em;
+  position: relative;
+  right: 0;
+  -webkit-transition: all 0.15s linear;
+  -moz-transition: all 0.15s linear;
+  -ms-transition: all 0.15s linear;
+  -o-transition: all 0.15s linear;
+  transition: all 0.15s linear;
+}
+
+/* TOTAL AND CHECKOUT  */
+.subtotal {
+  float: right;
+  width: 80%;
+}
+.subtotal .totalRow {
+  padding: .5em;
+  text-align: right;
+}
+.subtotal .totalRow.final {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.subtotal .totalRow span {
+  display: inline-block;
+  padding: 0 0 0 1em;
+  text-align: right;
+}
+.subtotal .totalRow .label {
+  font-size: .85em;
+  text-transform: uppercase;
+  color: #777;
+}
+.subtotal .totalRow .value {
+  letter-spacing: -.025em;
+  width: 35%;
 }
